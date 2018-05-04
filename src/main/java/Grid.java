@@ -34,5 +34,9 @@ public class Grid {
         Stack<Cell> worklist = new Stack<Cell>();
 
         worklist.push(cells.get(0));
+
+        while(!worklist.isEmpty()){
+
+        }
     }
 }
