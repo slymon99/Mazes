@@ -2,6 +2,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.awt.*;
+import java.util.HashSet;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -106,5 +108,56 @@ public class CellTest {
         Mockito.verify(gMock, Mockito.never()).fillRect(0, closeToEdge, Cell.DIMENSIONS, Cell.DIMENSIONS / 10);
     }
 
+    @Test
+    public void hasUnvisitedNeighbor() throws Exception {
+        Cell a = new Cell();
+        Cell b = new Cell();
+        Cell c = new Cell();
+        Cell d = new Cell();
+        Cell e = new Cell();
+        a.addNeighbor(b);
+        a.addNeighbor(c);
+        a.addNeighbor(d);
+        a.addNeighbor(e);
 
+        HashSet<Cell> visited = new HashSet<Cell>();
+        visited.add(b);
+        visited.add(c);
+        visited.add(d);
+
+        assertTrue(a.hasUnvisitedNeighbor(visited));
+
+        visited.add(e);
+
+        assertFalse(a.hasUnvisitedNeighbor(visited));
+    }
+
+    @Test
+    public void randomNeighbor() throws Exception {
+        Cell a = new Cell();
+        Cell b = new Cell();
+        Cell c = new Cell();
+        Cell d = new Cell();
+        Cell e = new Cell();
+        a.addNeighbor(b);
+        a.addNeighbor(c);
+        a.addNeighbor(d);
+        a.addNeighbor(e);
+
+        HashSet<Cell> visited = new HashSet<Cell>();
+        visited.add(b);
+        visited.add(c);
+
+        Random rand = new Random(10);
+        assertEquals(a.randomNeighbor(visited, rand), e);
+        assertEquals(a.randomNeighbor(visited, rand), d);
+        assertEquals(a.randomNeighbor(visited, rand), d);
+        assertEquals(a.randomNeighbor(visited, rand), d);
+        assertEquals(a.randomNeighbor(visited, rand), d);
+        assertEquals(a.randomNeighbor(visited, rand), e);
+
+        visited.add(d);
+        assertEquals(a.randomNeighbor(visited, rand), e);
+        assertEquals(a.randomNeighbor(visited, rand), e);
+    }
 }
