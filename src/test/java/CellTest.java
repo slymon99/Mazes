@@ -106,4 +106,5 @@ public class CellTest {
         Mockito.verify(gMock, Mockito.never()).fillRect(0, closeToEdge, Cell.DIMENSIONS, Cell.DIMENSIONS / 10);
     }
 
+
 }

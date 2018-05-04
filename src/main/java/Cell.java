@@ -11,7 +11,13 @@ public class Cell {
     private boolean connectedUp, connectedLeft, connectedRight, connectedDown;
     private int x, y;
 
-    public Cell() {
+    public Cell(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public Cell(){
+        this(0,0);
     }
 
     public void render(Graphics2D g2) {
