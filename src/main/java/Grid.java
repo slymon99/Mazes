@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -17,7 +18,13 @@ public class Grid {
         this.cols = cols;
         this.rand = rand;
 
+        cells = new ArrayList<Cell>();
+
         initialize();
+    }
+
+    public Grid(int rows, int cols){
+        this(rows, cols, new Random());
     }
 
     private void initialize(){
@@ -25,7 +32,26 @@ public class Grid {
             for (int j = 0; j < cols; j++) {
                 Cell c = new Cell(j * Cell.DIMENSIONS, i * Cell.DIMENSIONS);
                 cells.add(c);
+                int curIdx = cells.indexOf(c);
+
+                if (j > 0){
+                    Cell left = cells.get(curIdx - 1);
+                    left.addNeighbor(c);
+                    c.addNeighbor(left);
+                }
+
+                if (i > 0){
+                    Cell above = cells.get(curIdx - cols);
+                    above.addNeighbor(c);
+                    c.addNeighbor(above);
+                }
             }
+        }
+    }
+
+    public void render(Graphics2D g2){
+        for(Cell c: cells){
+            c.render(g2);
         }
     }
 

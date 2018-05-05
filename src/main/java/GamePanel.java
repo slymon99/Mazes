@@ -11,8 +11,8 @@ import java.awt.event.KeyListener;
 public class GamePanel extends JPanel implements KeyListener{
 
 
-    public Timer timer;
-
+    private Timer timer;
+    private Grid grid;
 
 
     public GamePanel(){
@@ -25,6 +25,7 @@ public class GamePanel extends JPanel implements KeyListener{
             }
         });
 
+        grid = new Grid(5, 5);
         timer.start();
     }
 
@@ -34,7 +35,7 @@ public class GamePanel extends JPanel implements KeyListener{
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-        g2.fillRect(10,10,10,10);
+        grid.render(g2);
 
     }
 
