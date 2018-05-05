@@ -161,4 +161,13 @@ public class CellTest {
         assertEquals(a.randomNeighbor(visited, rand), e);
     }
 
+    @Test
+    public void hasUnvisitedConnectedNeighbor() throws Exception {
+
+    }
+
+    @Test
+    public void randomConnectedNeighbor() throws Exception {
+
+    }
 }
