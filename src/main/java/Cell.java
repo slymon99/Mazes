@@ -11,12 +11,12 @@ import java.util.Random;
 public class Cell {
     public static final int DIMENSIONS = 20;
     private boolean connectedUp, connectedLeft, connectedRight, connectedDown;
-    private int x, y;
+    private int col, row;
     private ArrayList<Cell> neighbors;
 
-    public Cell(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Cell(int col, int row) {
+        this.col = col;
+        this.row = row;
         neighbors = new ArrayList<Cell>();
     }
 
@@ -25,6 +25,9 @@ public class Cell {
     }
 
     public void render(Graphics2D g2) {
+        int x = col * DIMENSIONS;
+        int y = row * DIMENSIONS;
+
         g2.setColor(Color.white);
         g2.fillRect(x, y, DIMENSIONS, DIMENSIONS);
 
@@ -64,9 +67,22 @@ public class Cell {
         neighbors.add(neighbor);
     }
 
+    public int getCol() {
+        return col;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int numNeighbors(){
+        return neighbors.size();
+    }
+
+
     public boolean hasUnvisitedNeighbor(HashSet<Cell> visited) {
-        for(Cell n: neighbors){
-            if (!visited.contains(n)){
+        for (Cell n : neighbors) {
+            if (!visited.contains(n)) {
                 return true;
             }
         }
@@ -78,14 +94,37 @@ public class Cell {
         //collect all unvisited neighbors
         ArrayList<Cell> unvisitedNeighbors = new ArrayList<Cell>();
 
-        for(Cell n: neighbors){
-            if(!visited.contains(n)){
+        for (Cell n : neighbors) {
+            if (!visited.contains(n)) {
                 unvisitedNeighbors.add(n);
             }
         }
 
         //return a random unvisited neighbor
         return unvisitedNeighbors.get(rand.nextInt(unvisitedNeighbors.size()));
+    }
+
+    public void connect(Cell other) {
+        if (other.getRow() == this.row) {
+            if (other.getCol() == this.col - 1) {
+                other.connectRight();
+                this.connectedLeft = true;
+            }
+            if (other.getCol() == this.col + 1) {
+                other.connectLeft();
+                this.connectedRight = true;
+            }
+        }
+        if (other.getCol() == this.col) {
+            if (other.getRow() == this.row - 1) {
+                other.connectDown();
+                this.connectedUp = true;
+            }
+            if (other.getRow() == this.row + 1) {
+                other.connectUp();
+                this.connectedDown = true;
+            }
+        }
     }
 
 }

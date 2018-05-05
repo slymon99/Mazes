@@ -160,4 +160,5 @@ public class CellTest {
         assertEquals(a.randomNeighbor(visited, rand), e);
         assertEquals(a.randomNeighbor(visited, rand), e);
     }
+
 }
