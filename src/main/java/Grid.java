@@ -21,6 +21,7 @@ public class Grid {
         cells = new ArrayList<Cell>();
 
         initialize();
+        buildMaze();
     }
 
     public Grid(int rows, int cols){
@@ -30,7 +31,7 @@ public class Grid {
     private void initialize(){
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                Cell c = new Cell(j * Cell.DIMENSIONS, i * Cell.DIMENSIONS);
+                Cell c = new Cell(j, i);
                 cells.add(c);
                 int curIdx = cells.indexOf(c);
 
@@ -53,6 +54,7 @@ public class Grid {
         for(Cell c: cells){
             c.render(g2);
         }
+
     }
 
     public void buildMaze() {
@@ -60,13 +62,16 @@ public class Grid {
         Stack<Cell> worklist = new Stack<Cell>();
 
         worklist.push(cells.get(0));
-        visited.add(cells.get(0));
 
         while(!worklist.isEmpty()){
-            Cell current = worklist.pop();
+            Cell current = worklist.peek();
+            visited.add(current);
             if (current.hasUnvisitedNeighbor(visited)){
                 Cell next = current.randomNeighbor(visited, rand);
-                visited.add(next);
+                current.connect(next);
+                worklist.push(next);
+            } else {
+                worklist.pop();
             }
         }
     }
