@@ -60,9 +60,14 @@ public class Grid {
         Stack<Cell> worklist = new Stack<Cell>();
 
         worklist.push(cells.get(0));
+        visited.add(cells.get(0));
 
         while(!worklist.isEmpty()){
-
+            Cell current = worklist.pop();
+            if (current.hasUnvisitedNeighbor(visited)){
+                Cell next = current.randomNeighbor(visited, rand);
+                visited.add(next);
+            }
         }
     }
 }
