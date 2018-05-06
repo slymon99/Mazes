@@ -29,6 +29,14 @@ public class DFS {
             Cell current = worklist.pop();
             visited.add(current);
 
+            if(current.hasUnvisitedConnectedNeighbor(visited)){
+                Cell next = current.randomConnectedNeighbor(visited, rand);
+                worklist.push(next);
+            } else {
+                while (!worklist.isEmpty() && !current.hasUnvisitedConnectedNeighbor(visited)){
+                    current = worklist.pop();
+                }
+            }
 
         }
     }
