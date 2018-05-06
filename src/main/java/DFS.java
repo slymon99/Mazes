@@ -26,16 +26,19 @@ public class DFS {
 
     public void tick() {
         if(!worklist.isEmpty()){
-            Cell current = worklist.pop();
+            Cell current = worklist.peek();
             visited.add(current);
 
             if(current.hasUnvisitedConnectedNeighbor(visited)){
                 Cell next = current.randomConnectedNeighbor(visited, rand);
                 worklist.push(next);
             } else {
+                //pop off until you get to something with neighbors
                 while (!worklist.isEmpty() && !current.hasUnvisitedConnectedNeighbor(visited)){
                     current = worklist.pop();
                 }
+                worklist.push(current);
+
             }
 
         }
