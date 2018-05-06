@@ -26,9 +26,13 @@ public class DFSTest {
         c.connect(d);
         b.connect(e);
 
+
         cells.addAll(Arrays.asList(a, b, c, d, e));
         DFS dfs = new DFS(cells, new Random(10));
         assertEquals(new HashSet<Cell>(), dfs.getVisited());
+        dfs.tick();
+        assertEquals(new HashSet<Cell>(), dfs.getVisited());
+        dfs.start();
         dfs.tick();
         assertEquals(new HashSet<Cell>(Arrays.asList(a)), dfs.getVisited());
         dfs.tick();
@@ -45,6 +49,7 @@ public class DFSTest {
         //depending on the seed DFS can go in multiple ways
 
         DFS dfs2 = new DFS(cells, new Random(11));
+        dfs2.start();
         assertEquals(new HashSet<Cell>(), dfs2.getVisited());
         dfs2.tick();
         assertEquals(new HashSet<Cell>(Arrays.asList(a)), dfs2.getVisited());
@@ -57,8 +62,5 @@ public class DFSTest {
         assertEquals(new HashSet<Cell>(Arrays.asList(a, b, e, c)), dfs2.getVisited());
         dfs2.tick();
         assertEquals(new HashSet<Cell>(Arrays.asList(a, b, c, d, e)), dfs2.getVisited());
-
-
-
     }
 }

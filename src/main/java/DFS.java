@@ -8,6 +8,7 @@ public class DFS {
     private HashSet<Cell> visited;
     private Random rand;
     private Stack<Cell> worklist;
+    private boolean started;
 
     public DFS(ArrayList<Cell> cells, Random rand) {
         this.cells = cells;
@@ -25,7 +26,7 @@ public class DFS {
     }
 
     public void tick() {
-        if(!worklist.isEmpty()){
+        if(!worklist.isEmpty() && started){
             Cell current = worklist.peek();
             visited.add(current);
 
@@ -42,5 +43,9 @@ public class DFS {
             }
 
         }
+    }
+
+    public void start() {
+        started = true;
     }
 }
