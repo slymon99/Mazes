@@ -29,6 +29,10 @@ public class Cell {
         int y = row * DIMENSIONS;
 
         g2.setColor(Color.white);
+
+        if(visited.contains(this)){
+            g2.setColor(Color.red);
+        }
         g2.fillRect(x, y, DIMENSIONS, DIMENSIONS);
 
         g2.setColor(Color.black);

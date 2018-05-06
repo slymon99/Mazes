@@ -107,6 +107,16 @@ public class CellTest {
         Mockito.verify(gMock, Mockito.never()).fillRect(closeToEdge, 0, Cell.DIMENSIONS / 10, Cell.DIMENSIONS);
         //bottom
         Mockito.verify(gMock, Mockito.never()).fillRect(0, closeToEdge, Cell.DIMENSIONS, Cell.DIMENSIONS / 10);
+
+
+        //testing cell being visited
+        visited.add(cell);
+        gMock = Mockito.mock(Graphics2D.class);
+        cell.render(gMock, visited);
+
+        Mockito.verify(gMock).setColor(Color.red);
+        Mockito.verify(gMock).fillRect(0, 0, Cell.DIMENSIONS, Cell.DIMENSIONS);
+
     }
 
     @Test
