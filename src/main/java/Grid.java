@@ -12,6 +12,7 @@ public class Grid {
     private ArrayList<Cell> cells;
     private int rows, cols;
     private Random rand;
+    private DFS dfs;
 
     public Grid(int rows, int cols, Random rand) {
         this.rows = rows;
@@ -22,6 +23,8 @@ public class Grid {
 
         initialize();
         buildMaze();
+
+        dfs = new DFS(cells, rand);
     }
 
     public Grid(int rows, int cols){
@@ -52,7 +55,7 @@ public class Grid {
 
     public void render(Graphics2D g2){
         for(Cell c: cells){
-            c.render(g2);
+            c.render(g2, dfs.getVisited());
         }
 
     }
@@ -74,5 +77,9 @@ public class Grid {
                 worklist.pop();
             }
         }
+    }
+
+    public ArrayList<Cell> getCells() {
+        return cells;
     }
 }

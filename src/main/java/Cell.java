@@ -24,7 +24,7 @@ public class Cell {
         this(0, 0);
     }
 
-    public void render(Graphics2D g2) {
+    public void render(Graphics2D g2, HashSet<Cell> visited) {
         int x = col * DIMENSIONS;
         int y = row * DIMENSIONS;
 

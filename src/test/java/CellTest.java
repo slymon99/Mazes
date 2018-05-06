@@ -15,7 +15,8 @@ public class CellTest {
     public void render() throws Exception {
         Graphics2D gMock = Mockito.mock(Graphics2D.class);
         Cell cell = new Cell();
-        cell.render(gMock);
+        HashSet<Cell> visited = new HashSet<Cell>();
+        cell.render(gMock, visited);
 
         Mockito.verify(gMock).setColor(Color.white);
         Mockito.verify(gMock).fillRect(0, 0, Cell.DIMENSIONS, Cell.DIMENSIONS);
@@ -36,7 +37,7 @@ public class CellTest {
 
         gMock = Mockito.mock(Graphics2D.class);
         cell.connectUp();
-        cell.render(gMock);
+        cell.render(gMock, visited);
 
         Mockito.verify(gMock).setColor(Color.white);
         Mockito.verify(gMock).fillRect(0, 0, Cell.DIMENSIONS, Cell.DIMENSIONS);
@@ -55,7 +56,7 @@ public class CellTest {
 
         gMock = Mockito.mock(Graphics2D.class);
         cell.connectLeft();
-        cell.render(gMock);
+        cell.render(gMock, visited);
 
         Mockito.verify(gMock).setColor(Color.white);
         Mockito.verify(gMock).fillRect(0, 0, Cell.DIMENSIONS, Cell.DIMENSIONS);
@@ -74,7 +75,7 @@ public class CellTest {
 
         gMock = Mockito.mock(Graphics2D.class);
         cell.connectRight();
-        cell.render(gMock);
+        cell.render(gMock, visited);
 
         Mockito.verify(gMock).setColor(Color.white);
         Mockito.verify(gMock).fillRect(0, 0, Cell.DIMENSIONS, Cell.DIMENSIONS);
@@ -92,7 +93,7 @@ public class CellTest {
 
         gMock = Mockito.mock(Graphics2D.class);
         cell.connectDown();
-        cell.render(gMock);
+        cell.render(gMock, visited);
 
         Mockito.verify(gMock).setColor(Color.white);
         Mockito.verify(gMock).fillRect(0, 0, Cell.DIMENSIONS, Cell.DIMENSIONS);
