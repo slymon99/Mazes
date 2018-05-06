@@ -163,11 +163,60 @@ public class CellTest {
 
     @Test
     public void hasUnvisitedConnectedNeighbor() throws Exception {
+        Cell a = new Cell(0, 0);
+        Cell b = new Cell();
+        Cell c = new Cell();
+        Cell d = new Cell();
+        Cell e = new Cell(0, 1);
+        a.addNeighbor(b);
+        a.addNeighbor(c);
+        a.addNeighbor(d);
+        a.addNeighbor(e);
 
+        HashSet<Cell> visited = new HashSet<Cell>();
+        visited.add(b);
+        visited.add(c);
+        visited.add(d);
+
+        assertFalse(a.hasUnvisitedConnectedNeighbor(visited));
+
+        a.connect(e);
+
+        assertTrue(a.hasUnvisitedConnectedNeighbor(visited));
+
+        visited.add(e);
+
+        assertFalse(a.hasUnvisitedConnectedNeighbor(visited));
     }
 
     @Test
     public void randomConnectedNeighbor() throws Exception {
+        Cell a = new Cell(0, 0);
+        Cell b = new Cell();
+        Cell c = new Cell();
+        Cell d = new Cell(0, 1);
+        Cell e = new Cell(1, 0);
+        a.addNeighbor(b);
+        a.addNeighbor(c);
+        a.addNeighbor(d);
+        a.addNeighbor(e);
+        a.connect(d);
+        a.connect(e);
 
+        HashSet<Cell> visited = new HashSet<Cell>();
+        visited.add(b);
+        visited.add(c);
+
+        Random rand = new Random(10);
+        assertEquals(a.randomConnectedNeighbor(visited, rand), e);
+        assertEquals(a.randomConnectedNeighbor(visited, rand), d);
+        assertEquals(a.randomConnectedNeighbor(visited, rand), d);
+        assertEquals(a.randomConnectedNeighbor(visited, rand), d);
+        assertEquals(a.randomConnectedNeighbor(visited, rand), d);
+        assertEquals(a.randomConnectedNeighbor(visited, rand), e);
+
+        visited.add(d);
+        assertEquals(a.randomConnectedNeighbor(visited, rand), e);
+        assertEquals(a.randomConnectedNeighbor(visited, rand), e);
     }
 }

@@ -75,7 +75,7 @@ public class Cell {
         return row;
     }
 
-    public int numNeighbors(){
+    public int numNeighbors() {
         return neighbors.size();
     }
 
@@ -127,4 +127,48 @@ public class Cell {
         }
     }
 
+    private ArrayList<Cell> connectedNeighbors() {
+        ArrayList<Cell> result = new ArrayList<Cell>();
+
+        for (Cell n : neighbors) {
+            if (n.getRow() == this.row) {
+                if ((n.getCol() == this.col - 1 && this.connectedLeft)
+                        || (n.getCol() == this.col + 1 && this.connectedRight)) {
+                    result.add(n);
+                }
+            }
+            if (n.getCol() == this.col) {
+                if ((n.getRow() == this.row - 1 && this.connectedUp)
+                        || (n.getRow() == this.row + 1 && this.connectedDown)) {
+                    result.add(n);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public boolean hasUnvisitedConnectedNeighbor(HashSet<Cell> visited) {
+        for (Cell n : connectedNeighbors()) {
+            if (!visited.contains(n)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public Cell randomConnectedNeighbor(HashSet<Cell> visited, Random rand) {
+        //collect all unvisited neighbors
+        ArrayList<Cell> unvisitedNeighbors = new ArrayList<Cell>();
+
+        for (Cell n : connectedNeighbors()) {
+            if (!visited.contains(n)) {
+                unvisitedNeighbors.add(n);
+            }
+        }
+
+        //return a random unvisited neighbor
+        return unvisitedNeighbors.get(rand.nextInt(unvisitedNeighbors.size()));
+    }
 }
