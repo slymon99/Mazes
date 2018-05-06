@@ -149,16 +149,16 @@ public class CellTest {
         visited.add(c);
 
         Random rand = new Random(10);
-        assertEquals(a.randomNeighbor(visited, rand), e);
-        assertEquals(a.randomNeighbor(visited, rand), d);
-        assertEquals(a.randomNeighbor(visited, rand), d);
-        assertEquals(a.randomNeighbor(visited, rand), d);
-        assertEquals(a.randomNeighbor(visited, rand), d);
-        assertEquals(a.randomNeighbor(visited, rand), e);
+        assertEquals(e, a.randomNeighbor(visited, rand));
+        assertEquals(d, a.randomNeighbor(visited, rand));
+        assertEquals(d, a.randomNeighbor(visited, rand));
+        assertEquals(d, a.randomNeighbor(visited, rand));
+        assertEquals(d, a.randomNeighbor(visited, rand));
+        assertEquals(e, a.randomNeighbor(visited, rand));
 
         visited.add(d);
-        assertEquals(a.randomNeighbor(visited, rand), e);
-        assertEquals(a.randomNeighbor(visited, rand), e);
+        assertEquals(e, a.randomNeighbor(visited, rand));
+        assertEquals(e, a.randomNeighbor(visited, rand));
     }
 
     @Test
@@ -208,15 +208,15 @@ public class CellTest {
         visited.add(c);
 
         Random rand = new Random(10);
-        assertEquals(a.randomConnectedNeighbor(visited, rand), e);
-        assertEquals(a.randomConnectedNeighbor(visited, rand), d);
-        assertEquals(a.randomConnectedNeighbor(visited, rand), d);
-        assertEquals(a.randomConnectedNeighbor(visited, rand), d);
-        assertEquals(a.randomConnectedNeighbor(visited, rand), d);
-        assertEquals(a.randomConnectedNeighbor(visited, rand), e);
+        assertEquals(e, a.randomConnectedNeighbor(visited, rand));
+        assertEquals(d, a.randomConnectedNeighbor(visited, rand));
+        assertEquals(d, a.randomConnectedNeighbor(visited, rand));
+        assertEquals(d, a.randomConnectedNeighbor(visited, rand));
+        assertEquals(d, a.randomConnectedNeighbor(visited, rand));
+        assertEquals(e, a.randomConnectedNeighbor(visited, rand));
 
         visited.add(d);
-        assertEquals(a.randomConnectedNeighbor(visited, rand), e);
-        assertEquals(a.randomConnectedNeighbor(visited, rand), e);
+        assertEquals(e, a.randomConnectedNeighbor(visited, rand));
+        assertEquals(e, a.randomConnectedNeighbor(visited, rand));
     }
 }
