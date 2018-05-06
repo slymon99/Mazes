@@ -18,7 +18,7 @@ public class GamePanel extends JPanel implements KeyListener{
     public GamePanel(){
         addKeyListener(this);
 
-        timer = new Timer(1000 / 60, new ActionListener() {
+        timer = new Timer(1000 / 2, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 repaint();
@@ -41,7 +41,7 @@ public class GamePanel extends JPanel implements KeyListener{
 
     @Override
     public void keyTyped(KeyEvent e) {
-
+        grid.handleKey(e);
     }
 
     @Override

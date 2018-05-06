@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -25,6 +26,7 @@ public class Grid {
         buildMaze();
 
         dfs = new DFS(cells, rand);
+
     }
 
     public Grid(int rows, int cols){
@@ -60,6 +62,10 @@ public class Grid {
 
     }
 
+    public void onTick(){
+        dfs.tick();
+    }
+
     public void buildMaze() {
         HashSet<Cell> visited = new HashSet<Cell>();
         Stack<Cell> worklist = new Stack<Cell>();
@@ -79,7 +85,10 @@ public class Grid {
         }
     }
 
-    public ArrayList<Cell> getCells() {
-        return cells;
+
+    public void handleKey(KeyEvent e) {
+        if(e.equals(KeyEvent.VK_D)){
+
+        }
     }
 }
