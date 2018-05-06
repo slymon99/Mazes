@@ -21,11 +21,12 @@ public class GamePanel extends JPanel implements KeyListener{
         timer = new Timer(1000 / 2, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                grid.onTick();
                 repaint();
             }
         });
 
-        grid = new Grid(5, 5);
+        grid = new Grid(25, 25);
         timer.start();
     }
 
@@ -41,11 +42,11 @@ public class GamePanel extends JPanel implements KeyListener{
 
     @Override
     public void keyTyped(KeyEvent e) {
-        grid.handleKey(e);
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
+        grid.handleKey(e);
     }
 
     @Override

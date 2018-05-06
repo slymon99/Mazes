@@ -87,8 +87,8 @@ public class Grid {
 
 
     public void handleKey(KeyEvent e) {
-        if(e.equals(KeyEvent.VK_D)){
-
+        if(e.getKeyCode() == KeyEvent.VK_D){
+            dfs.start();
         }
     }
 }
